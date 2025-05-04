@@ -6,8 +6,10 @@ import com.hvnhuan.identity_service.entity.User;
 import com.hvnhuan.identity_service.exception.AppException;
 import com.hvnhuan.identity_service.exception.ErrorCode;
 import com.hvnhuan.identity_service.repository.UserRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -16,7 +18,7 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public User createUser(UserCreationRequest request){
+    public User createUser( UserCreationRequest request){
 
         User user = new User();
 

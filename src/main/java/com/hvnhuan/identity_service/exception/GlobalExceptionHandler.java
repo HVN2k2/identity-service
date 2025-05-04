@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = Exception.class)
-    ResponseEntity<ApiResponse> handlingRuntimeException(RuntimeException exception){
+    ResponseEntity<ApiResponse> handlingRuntimeException(Exception exception){
+
         ApiResponse apiResponse = new ApiResponse();
         apiResponse.setCode(ErrorCode.UNCATEGORIZED_EXCEPTION.getCode());
-        apiResponse.setResult(ErrorCode.UNCATEGORIZED_EXCEPTION.getMessage());
+        apiResponse.setMessage(ErrorCode.UNCATEGORIZED_EXCEPTION.getMessage());
+
         return ResponseEntity.badRequest().body(apiResponse);
     }
 
@@ -22,23 +24,45 @@ public class GlobalExceptionHandler {
         ErrorCode errorCode = exception.getErrorCode();
         ApiResponse apiResponse = new ApiResponse();
         apiResponse.setCode(errorCode.getCode());
-        apiResponse.setResult(errorCode.getMessage());
-        return ResponseEntity.badRequest().body(apiResponse);
-    }
-    @ExceptionHandler(value = MethodArgumentNotValidException.class)
-    ResponseEntity<ApiResponse> handlingMethodArgumentNotValidException(MethodArgumentNotValidException exception){
-        String enumKey = exception.getFieldError().getDefaultMessage();
-
-        ErrorCode errorCode = ErrorCode.INVALID_KEY;
-        try {
-            errorCode = ErrorCode.valueOf(enumKey);
-        }
-        catch (IllegalArgumentException e){
-
-        }
-        ApiResponse apiResponse = new ApiResponse();
-        apiResponse.setCode(errorCode.getCode());
         apiResponse.setMessage(errorCode.getMessage());
         return ResponseEntity.badRequest().body(apiResponse);
     }
+
+    @ExceptionHandler(value = MethodArgumentNotValidException.class)
+    ResponseEntity<String> handlingMethodArgumentNotValidException(MethodArgumentNotValidException exception){
+        return ResponseEntity.badRequest().body(exception.getFieldError().getDefaultMessage());
+    }
+//
+//    @ExceptionHandler(value = Exception.class)
+//    ResponseEntity<ApiResponse> handlingRuntimeException(RuntimeException exception){
+//        ApiResponse apiResponse = new ApiResponse();
+//        apiResponse.setCode(ErrorCode.UNCATEGORIZED_EXCEPTION.getCode());
+//        apiResponse.setResult(ErrorCode.UNCATEGORIZED_EXCEPTION.getMessage());
+//        return ResponseEntity.badRequest().body(apiResponse);
+//    }
+//
+//    @ExceptionHandler(value = AppException.class)
+//    ResponseEntity<ApiResponse> handlingAppException(AppException exception){
+//        ErrorCode errorCode = exception.getErrorCode();
+//        ApiResponse apiResponse = new ApiResponse();
+//        apiResponse.setCode(errorCode.getCode());
+//        apiResponse.setResult(errorCode.getMessage());
+//        return ResponseEntity.badRequest().body(apiResponse);
+//    }
+//    @ExceptionHandler(value = MethodArgumentNotValidException.class)
+//    ResponseEntity<ApiResponse> handlingMethodArgumentNotValidException(MethodArgumentNotValidException exception){
+//        String enumKey = exception.getFieldError().getDefaultMessage();
+//
+//        ErrorCode errorCode = ErrorCode.INVALID_KEY;
+//        try {
+//            errorCode = ErrorCode.valueOf(enumKey);
+//        }
+//        catch (IllegalArgumentException e){
+//
+//        }
+//        ApiResponse apiResponse = new ApiResponse();
+//        apiResponse.setCode(errorCode.getCode());
+//        apiResponse.setMessage(errorCode.getMessage());
+//        return ResponseEntity.badRequest().body(apiResponse);
+//    }
 }
