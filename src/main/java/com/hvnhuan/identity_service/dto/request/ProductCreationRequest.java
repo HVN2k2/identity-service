@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 public class ProductCreationRequest {
 
-    @Size(min = 5, message = "Product name must be at least 5 character!")
+    @Size(min = 3, message = "PRODUCTNAME_INVALID")
     private String name;
     private String detail;
     private LocalDate productionDate;

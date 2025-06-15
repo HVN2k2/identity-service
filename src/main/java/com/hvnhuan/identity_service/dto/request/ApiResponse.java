@@ -2,7 +2,7 @@ package com.hvnhuan.identity_service.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonInclude(JsonInclude.Include.NON_NULL) // Null thì không trả về
 public class ApiResponse <T>{
     private int code = 1000;
     private String message;

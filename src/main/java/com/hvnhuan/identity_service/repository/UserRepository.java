@@ -1,4 +1,4 @@
-package com.hvnhuan.identity_service.repository;
+    package com.hvnhuan.identity_service.repository;
 
 import com.hvnhuan.identity_service.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;

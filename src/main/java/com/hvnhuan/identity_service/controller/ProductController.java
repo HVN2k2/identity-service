@@ -1,5 +1,6 @@
 package com.hvnhuan.identity_service.controller;
 
+import com.hvnhuan.identity_service.dto.request.ApiResponse;
 import com.hvnhuan.identity_service.dto.request.ProductCreationRequest;
 import com.hvnhuan.identity_service.dto.request.ProductUpdateRequest;
 import com.hvnhuan.identity_service.entity.Product;
@@ -17,13 +18,15 @@ public class ProductController {
     private ProductService productService;
 
     @PostMapping
-    Product createProduct(@RequestBody @Valid ProductCreationRequest request){
-        return productService.creationProduct(request);
+    ApiResponse<Product> createProduct(@RequestBody @Valid ProductCreationRequest request){
+        ApiResponse apiResponse = new ApiResponse();
+        apiResponse.setResult(productService.creationProduct(request));
+        return apiResponse;
     }
 
     @GetMapping("/{productId}")
-    Product getProduct(@PathVariable("id") String id){
-        return productService.getProduct(id);
+    Product getProduct(@PathVariable("productId") String productId){
+        return productService.getProduct(productId);
     }
 
     @GetMapping
