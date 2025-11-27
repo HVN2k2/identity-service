@@ -1,5 +1,6 @@
 package com.hvnhuan.identity_service.dto.request;
 
+import com.hvnhuan.identity_service.entity.Role;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,5 +18,9 @@ public class UserCreationRequest {
     private String firstName;
     private String lastName;
     private LocalDate dob;
+    private String phone;
+    private String email;
+    private String address;
+    private Role role = Role.PATIENT;
 
 }

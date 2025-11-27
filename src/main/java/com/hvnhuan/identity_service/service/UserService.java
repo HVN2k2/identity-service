@@ -30,6 +30,10 @@ public class UserService {
         user.setFirstName(request.getFirstName());
         user.setLastName(request.getLastName());
         user.setDob(request.getDob());
+        user.setPhone(request.getPhone());
+        user.setEmail(request.getEmail());
+        user.setAddress(request.getAddress());
+        user.setRole(request.getRole() != null ? request.getRole() : com.hvnhuan.identity_service.entity.Role.PATIENT);
 
         return userRepository.save(user);
 
@@ -45,10 +49,14 @@ public class UserService {
 
     public User updateUser(String userId, UserUpdateRequest request){
         User user = getUser(userId);
-        user.setPassword(request.getPassword());
-        user.setFirstName(request.getFirstName());
-        user.setLastName(request.getLastName());
-        user.setDob(request.getDob());
+        if(request.getPassword() != null) user.setPassword(request.getPassword());
+        if(request.getFirstName() != null) user.setFirstName(request.getFirstName());
+        if(request.getLastName() != null) user.setLastName(request.getLastName());
+        if(request.getDob() != null) user.setDob(request.getDob());
+        if(request.getPhone() != null) user.setPhone(request.getPhone());
+        if(request.getEmail() != null) user.setEmail(request.getEmail());
+        if(request.getAddress() != null) user.setAddress(request.getAddress());
+        if(request.getRole() != null) user.setRole(request.getRole());
 
         return userRepository.save(user);
     }

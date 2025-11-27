@@ -24,6 +24,10 @@ public class AppointmentService {
         appointment.setTitle(requet.getTitle());
         appointment.setDetail(requet.getDetail());
         appointment.setDate(requet.getDate());
+        appointment.setTime(requet.getTime());
+        appointment.setPatientId(requet.getPatientId());
+        appointment.setDoctorId(requet.getDoctorId());
+        appointment.setStatus(requet.getStatus() != null ? requet.getStatus() : "SCHEDULED");
 
         return appointmentRepository.save(appointment);
     }
@@ -39,9 +43,13 @@ public class AppointmentService {
 
     public Appointment updateAppointment(String id, AppointmentUpdateRequest request){
         Appointment appointment = getAppoitment(id);
-        appointment.setTitle(request.getTitle());
-        appointment.setDetail(request.getDetail());
-        appointment.setDate(request.getDate());
+        if(request.getTitle() != null) appointment.setTitle(request.getTitle());
+        if(request.getDetail() != null) appointment.setDetail(request.getDetail());
+        if(request.getDate() != null) appointment.setDate(request.getDate());
+        if(request.getTime() != null) appointment.setTime(request.getTime());
+        if(request.getPatientId() != null) appointment.setPatientId(request.getPatientId());
+        if(request.getDoctorId() != null) appointment.setDoctorId(request.getDoctorId());
+        if(request.getStatus() != null) appointment.setStatus(request.getStatus());
 
         return appointmentRepository.save(appointment);
     }

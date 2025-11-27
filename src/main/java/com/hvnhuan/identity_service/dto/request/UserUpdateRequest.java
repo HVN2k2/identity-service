@@ -1,5 +1,6 @@
 package com.hvnhuan.identity_service.dto.request;
 
+import com.hvnhuan.identity_service.entity.Role;
 import java.time.LocalDate;
 
 public class UserUpdateRequest {
@@ -7,6 +8,10 @@ public class UserUpdateRequest {
     private String firstName;
     private String lastName;
     private LocalDate dob;
+    private String phone;
+    private String email;
+    private String address;
+    private Role role;
 
     public String getPassword() {
         return password;
@@ -38,5 +43,37 @@ public class UserUpdateRequest {
 
     public void setDob(LocalDate dob) {
         this.dob = dob;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }
